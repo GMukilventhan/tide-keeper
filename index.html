@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tide Keeper</title>
+  <meta name="description" content="Tide Keeper — gardien de phare. Guide les navires perdus dans la brume et repousse les créatures des abysses.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="game" aria-label="Zone de jeu"></canvas>
+  <div id="vignette"></div>
+
+  <header id="hud" class="hidden">
+    <div class="hud-left">
+      <div class="night" id="hNight">Nuit 1</div>
+      <div class="lives" id="hLives"></div>
+    </div>
+    <div class="hud-center">
+      <div class="score" id="hScore">0</div>
+      <div class="combo" id="hCombo"></div>
+    </div>
+    <div class="hud-right">
+      <div class="bar"><span>Huile</span><div class="track"><div id="hOil" class="fill oil"></div></div></div>
+      <div class="bar"><span>Corne</span><div class="track"><div id="hHorn" class="fill horn"></div></div></div>
+    </div>
+  </header>
+
+  <div id="banner"></div>
+
+  <div class="corner-btns">
+    <button id="btnPause" class="icon-btn hidden" aria-label="Pause">❚❚</button>
+    <button id="btnMute" class="icon-btn" aria-label="Couper le son">♪</button>
+  </div>
+
+  <div id="touch" class="hidden">
+    <button id="tHorn">Corne</button>
+    <button id="tFocus">Focaliser</button>
+  </div>
+
+  <section id="title" class="overlay show">
+    <div class="panel">
+      <p class="kicker">Gardien du phare</p>
+      <h1>Tide Keeper</h1>
+      <p class="lead">La brume est tombée sur l'archipel. Guide les navires perdus jusqu'à ton île, brûle les créatures des abysses — et ne laisse jamais la flamme s'éteindre.</p>
+      <ul class="rules">
+        <li><span class="dot ship"></span><span>Un navire <b>éclairé</b> suit ta lumière jusqu'au port. Dans le noir, il dérive vers les récifs.</span></li>
+        <li><span class="dot mon"></span><span>Les créatures ralentissent dans la lumière… et finissent par y brûler.</span></li>
+        <li><span class="dot oil"></span><span>Chaque navire à quai et chaque baril repêché rapporte de l'huile.</span></li>
+      </ul>
+      <ul class="controls desktop-only">
+        <li><kbd>Souris</kbd> orienter le faisceau</li>
+        <li><kbd>Clic maintenu</kbd> / <kbd>Espace</kbd> focaliser : plus loin, plus fort, plus gourmand</li>
+        <li><kbd>Clic droit</kbd> / <kbd>F</kbd> corne de brume, repousse les créatures</li>
+        <li><kbd>← →</kbd> viser au clavier · <kbd>P</kbd> pause · <kbd>M</kbd> son</li>
+      </ul>
+      <ul class="controls touch-only">
+        <li>Glisse le doigt pour orienter le faisceau</li>
+        <li>Bouton <b>Focaliser</b> (ou deux doigts) pour concentrer la lumière</li>
+        <li>Bouton <b>Corne</b> pour repousser les créatures</li>
+      </ul>
+      <button class="primary" id="btnStart">Allumer le phare</button>
+      <p class="best" id="bestTitle"></p>
+    </div>
+  </section>
+
+  <section id="dawn" class="overlay">
+    <div class="panel wide">
+      <p class="kicker">L'aube se lève</p>
+      <h2 id="dawnTitle">Nuit 1 survécue</h2>
+      <div class="stats" id="dawnStats"></div>
+      <p class="sub">Choisis une amélioration pour le phare</p>
+      <div class="cards" id="cards"></div>
+    </div>
+  </section>
+
+  <section id="over" class="overlay">
+    <div class="panel">
+      <p class="kicker">Le phare s'est éteint</p>
+      <h2 id="overTitle">Naufrage</h2>
+      <div class="stats" id="overStats"></div>
+      <button class="primary" id="btnRestart">Rallumer le phare</button>
+    </div>
+  </section>
+
+  <section id="pause" class="overlay">
+    <div class="panel">
+      <p class="kicker">La flamme vacille</p>
+      <h2>Pause</h2>
+      <div class="row">
+        <button class="primary" id="btnResume">Reprendre</button>
+        <button class="ghost" id="btnQuit">Abandonner</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="src/audio.js"></script>
+  <script src="src/game.js"></script>
+</body>
+</html>
